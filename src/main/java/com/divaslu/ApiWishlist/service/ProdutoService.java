@@ -32,6 +32,17 @@ public class ProdutoService {
         return null;
     }
 
-	
+    public Produto updateProduto(Produto produto) {
+		Produto produtoAlterado = repository.getOne(produto.getId());
 		
+           if(produtoAlterado != null){
+        	   
+        	   produtoAlterado.setNome(produto.getNome());
+               produtoAlterado.setDescricao(produto.getDescricao());
+               produtoAlterado.setCor(produto.getCor());
+               produtoAlterado.setValor(produto.getValor());
+               
+             }
+           return repository.save(produtoAlterado);
+   }	
 }
