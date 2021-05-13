@@ -37,7 +37,7 @@ public class ProdutoService {
 		
            if(produtoAlterado != null){
         	   
-        	   produtoAlterado.setNome(produto.getNome());
+        	   if(produtoAlterado.nome != null) produtoAlterado.setNome(produto.getNome());
                produtoAlterado.setDescricao(produto.getDescricao());
                produtoAlterado.setCor(produto.getCor());
                produtoAlterado.setValor(produto.getValor());
