@@ -25,10 +25,10 @@ public class Produto {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY) //usando o mysql "Identity fará o auto incremento.
 	 long id;
-	 String nome;
-	 String descricao;
-	 String cor;
-	 double valor;
+	 public String nome;
+	 public String descricao;
+	 public String cor;
+	 public double valor;
 	
 	
 	
