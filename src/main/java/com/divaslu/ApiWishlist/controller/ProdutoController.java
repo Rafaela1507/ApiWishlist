@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 import com.divaslu.ApiWishlist.model.Produto;
 import com.divaslu.ApiWishlist.service.ProdutoService;
@@ -34,12 +36,20 @@ public class ProdutoController {
 	
 	@PostMapping
 	@ApiOperation(value = "Salva um produto")
+	@ApiResponses(value = {
+			@ApiResponse(code = 201 , message = "Cria um Produto"),
+			@ApiResponse(code = 400, message = "Falha nos dados enviados"),
+	        @ApiResponse(code = 500, message = "Foi gerada uma exceção."),})
+	
 	public ResponseEntity<Produto> post(@RequestBody Produto produto){
 		return ResponseEntity.status(HttpStatus.CREATED).body(service.saveProduto(produto));
 	}
 	    
 	@GetMapping
-	@ApiOperation(value = "Retorna uma lista de produtos")
+	@ApiOperation(value = "Retorna uma lista de Produtos")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200 , message = "Retorna uma lista de Produtos"),
+			@ApiResponse(code = 500, message = "Foi gerada uma exceção."),})
 	public ResponseEntity<List<Produto>> getAll(){
 		return ResponseEntity.ok(service.getProdutos());
 		
@@ -47,6 +57,10 @@ public class ProdutoController {
 	
 	@GetMapping("/{id}")
 	@ApiOperation(value = "Retorna um único produto")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200 , message = "Retorna um único Produto"),
+			@ApiResponse(code = 404, message = "Produto não localizado"),
+	        @ApiResponse(code = 500, message = "Foi gerada uma exceção."),})
 	public ResponseEntity<Produto> getById(@PathVariable Long id){
 		return service.getProdutoById(id).map(resp -> ResponseEntity.ok(resp)).orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
 					
@@ -55,6 +69,11 @@ public class ProdutoController {
 	
 	@DeleteMapping("/{id}")
 	@ApiOperation(value = "Deleta um produto")
+	@ApiResponses(value = {
+			@ApiResponse(code = 204 , message = "Produto excluido com sucesso."),
+			@ApiResponse(code = 400, message = "Falha nos dados enviados"),
+			@ApiResponse(code = 404, message = "Produto não localizado"),
+	        @ApiResponse(code = 500, message = "Foi gerada uma exceção."),})
 	
 	public ResponseEntity<String> deletarProduto(@PathVariable long id){
         try {
@@ -68,6 +87,12 @@ public class ProdutoController {
 	
 	
 	@PutMapping
+	@ApiResponses(value = {
+			@ApiResponse(code = 204 , message = "Produto alterado com sucesso."),
+			@ApiResponse(code = 400, message = "Falha nos dados enviados"),
+			@ApiResponse(code = 404, message = "Produto não localizado"),
+	        @ApiResponse(code = 500, message = "Foi gerada uma exceção."),})
+	
 	@ApiOperation(value = "Altera um produto")
 	public void put(@RequestBody Produto produto){
 	        service.updateProduto(produto);
