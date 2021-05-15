@@ -32,7 +32,7 @@ public class Produto {
 	
 	
 	
-	public Produto(String nome, String descricao, Double valor, int estoque) {
+	public Produto(String nome, String descricao, String cor, Double valor) {
 		this.nome = nome;
 		this.descricao = descricao;
 		this.cor = cor;
