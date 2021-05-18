@@ -39,6 +39,7 @@ public class WishListController {
     public ResponseEntity<WishListItem> findWishListItemById(@PathVariable long id) {
         return ResponseEntity.ok( service.getWishById(id));
     }
+    
     @GetMapping("/WishListItemByCliente/{id}")
     @ApiOperation(value = "Obtém uma lista de itens da wishlist de um cliente")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Itens obtidos"),
@@ -47,6 +48,7 @@ public class WishListController {
     public ResponseEntity<List<WishListItem>> findWishListItemByCliente(@PathVariable long id) {
         return ResponseEntity.ok(service.getWishsByClient(id));
     }
+    
     @GetMapping("/WishListItemByProduto/{id}")
     @ApiOperation(value = "Obtém uma lista de itens da wishlist de um produto")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Itens obtidos"),
